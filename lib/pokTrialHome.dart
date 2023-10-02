@@ -3,6 +3,7 @@ import 'dart:convert';
 // import 'package:first/Api3/pokDataModel.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:pok/episodPage.dart';
 import 'package:pok/pokDataModel.dart';
 
 class PokTrialHome extends StatefulWidget {
@@ -46,14 +47,14 @@ class _PokTrialHomeState extends State<PokTrialHome> {
           future: _dataFuture,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: Text("Waighting"));
+              return const Center(child: Text("Waighting"));
             } else {
               return SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15),
                       child: Text(
                         "Explore",
                         style: TextStyle(
@@ -61,11 +62,11 @@ class _PokTrialHomeState extends State<PokTrialHome> {
                             color: Color.fromARGB(255, 225, 214, 214)),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: products.length,
                       itemBuilder: (context, index) {
@@ -74,22 +75,85 @@ class _PokTrialHomeState extends State<PokTrialHome> {
                             padding: const EdgeInsets.all(8.0),
                             child: Column(
                               children: [
-                                Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 230,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: Image.network(
-                                      products[index].poster.toString(),
-                                      fit: BoxFit.cover,
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => EpisodsPage(
+                                          data: products[index],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 230,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: const Color.fromARGB(
+                                          255, 156, 178, 209),
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Stack(
+                                        children: [
+                                          Positioned(
+                                            child: Image.network(
+                                              products[index].poster.toString(),
+                                              fit: BoxFit.cover,
+                                              width: double.infinity,
+                                              height: double.infinity,
+                                            ),
+                                          ),
+                                          Positioned(
+                                            bottom: 0.0,
+                                            child: Container(
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.3,
+                                              decoration: const BoxDecoration(
+                                                gradient: LinearGradient(
+                                                  colors: [
+                                                    Color.fromARGB(
+                                                        0, 39, 29, 29),
+                                                    Color.fromARGB(
+                                                        224, 27, 25, 25),
+                                                  ],
+                                                  stops: [0.1, 0.9],
+                                                  begin: Alignment.topCenter,
+                                                  end: Alignment.bottomCenter,
+                                                  // transform:
+                                                  //     GradientRotation(5 / 10),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            width: 350,
+                                            left: 10,
+                                            bottom: 20,
+                                            child: Text(
+                                              products[index]
+                                                  .seasonTitle
+                                                  .toString(),
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 25,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Color.fromARGB(255, 156, 178, 209),
-                                  ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 5,
                                 ),
                                 Row(
@@ -102,7 +166,7 @@ class _PokTrialHomeState extends State<PokTrialHome> {
                                           horizontal: 6),
                                       child: Text(
                                         "Season: ${products[index].seasonNum}",
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 20,
                                             fontWeight: FontWeight.w500,
                                             color: Color.fromARGB(
@@ -114,7 +178,7 @@ class _PokTrialHomeState extends State<PokTrialHome> {
                                           horizontal: 10),
                                       child: Text(
                                         "Ep: ${products[index].totalEp}",
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 17,
                                             fontWeight: FontWeight.w500,
                                             color: Color.fromARGB(
@@ -123,7 +187,7 @@ class _PokTrialHomeState extends State<PokTrialHome> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 10,
                                 )
                               ],

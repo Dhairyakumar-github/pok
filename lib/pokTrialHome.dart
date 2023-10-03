@@ -37,20 +37,9 @@ class _PokTrialHomeState extends State<PokTrialHome> {
     // TODO: implement initState
     super.initState();
     _dataFuture = getData();
-    // checkConnectivity();
-    // Connectivity().onConnectivityChanged.listen((result) {
-    //   setState(() {
-    //     isOffline = (result == ConnectivityResult.none);
-    //   });
-    // });
-  }
 
-  // Future<void> checkConnectivity() async {
-  //   final connectivityResult = await Connectivity().checkConnectivity();
-  //   setState(() {
-  //     isOffline = (connectivityResult == ConnectivityResult.none);
-  //   });
-  // }
+    getData();
+  }
 
   @override
   Widget build(BuildContext context) {

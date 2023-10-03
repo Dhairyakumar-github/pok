@@ -61,7 +61,9 @@ class EpisodsPage extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => EpisodDetailsPage(),
+                            builder: (context) => EpisodDetailsPage(
+                              episodsdata: data.episodes[index],
+                            ),
                           ));
                     },
                     child: ClipRRect(

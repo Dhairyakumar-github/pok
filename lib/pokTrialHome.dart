@@ -14,6 +14,7 @@ class PokTrialHome extends StatefulWidget {
 }
 
 class _PokTrialHomeState extends State<PokTrialHome> {
+  bool isOffline = false;
   Future<List<PokData2>>? _dataFuture;
   List<PokData2> products = [];
   final api = "https://dhairyakumar-github.github.io/trial/trial.json";
@@ -36,7 +37,20 @@ class _PokTrialHomeState extends State<PokTrialHome> {
     // TODO: implement initState
     super.initState();
     _dataFuture = getData();
+    // checkConnectivity();
+    // Connectivity().onConnectivityChanged.listen((result) {
+    //   setState(() {
+    //     isOffline = (result == ConnectivityResult.none);
+    //   });
+    // });
   }
+
+  // Future<void> checkConnectivity() async {
+  //   final connectivityResult = await Connectivity().checkConnectivity();
+  //   setState(() {
+  //     isOffline = (connectivityResult == ConnectivityResult.none);
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +61,7 @@ class _PokTrialHomeState extends State<PokTrialHome> {
           future: _dataFuture,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: Text("Waighting"));
+              return const Center(child: CircularProgressIndicator());
             } else {
               return SingleChildScrollView(
                 child: Column(

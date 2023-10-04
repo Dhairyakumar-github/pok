@@ -39,6 +39,7 @@ class _PokTrialHomeState extends State<PokTrialHome> {
     // TODO: implement initState
     super.initState();
     _dataFuture = getData();
+    // getData();
   }
 
   @override

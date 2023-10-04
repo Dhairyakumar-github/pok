@@ -19,16 +19,18 @@ class _PokTrialHomeState extends State<PokTrialHome> {
   List<PokData2> products = [];
   final api = "https://dhairyakumar-github.github.io/trial/trial.json";
   Future<List<PokData2>> getData() async {
-    var response = await http.get(Uri.parse(api));
-    var data = await jsonDecode(response.body.toString());
-    if (response.statusCode == 200) {
-      for (Map<String, dynamic> index in data) {
-        products.add(PokData2.fromJson(index));
+    {
+      var response = await http.get(Uri.parse(api));
+      var data = await jsonDecode(response.body.toString());
+      if (response.statusCode == 200) {
+        for (Map<String, dynamic> index in data) {
+          products.add(PokData2.fromJson(index));
+        }
+        // print(products);
+        return products;
+      } else {
+        return products;
       }
-      // print(products);
-      return products;
-    } else {
-      return products;
     }
   }
 
@@ -37,8 +39,6 @@ class _PokTrialHomeState extends State<PokTrialHome> {
     // TODO: implement initState
     super.initState();
     _dataFuture = getData();
-
-    getData();
   }
 
   @override

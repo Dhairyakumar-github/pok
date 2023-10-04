@@ -11,11 +11,11 @@ class EpisodsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 43, 41, 41),
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: const Color.fromARGB(255, 43, 41, 41),
         scrolledUnderElevation: 0,
         title: Text("Season: ${data.seasonNum.toString()}",
-            style: TextStyle(fontSize: 24, color: Colors.white)),
+            style: const TextStyle(fontSize: 24, color: Colors.white)),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -31,14 +31,14 @@ class EpisodsPage extends StatelessWidget {
                 height: 230,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  padding: EdgeInsets.symmetric(horizontal: 10),
                   child: Text(
                     "Episodes",
                     style: TextStyle(fontSize: 24, color: Colors.white),
@@ -46,11 +46,11 @@ class EpisodsPage extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: data.episodes.length,
               itemBuilder: (context, index) {
@@ -97,7 +97,7 @@ class EpisodsPage extends StatelessWidget {
                                         const EdgeInsets.only(left: 10, top: 5),
                                     child: Text(
                                       "Ep: ${data.episodes[index].episodeNumber.toString()}",
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 17,
                                           color: Colors.white,
                                           fontWeight: FontWeight.w400),
@@ -115,7 +115,7 @@ class EpisodsPage extends StatelessWidget {
                                             ? "${data.episodes[index].epTitle.toString().substring(0, 24)}..."
                                             : data.episodes[index].epTitle
                                                 .toString(),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 21, color: Colors.white),
                                       ),
                                     ),
